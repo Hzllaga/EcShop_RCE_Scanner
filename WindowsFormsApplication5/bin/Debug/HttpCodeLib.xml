@@ -1,0 +1,1307 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HttpCodeLib</name>
+    </assembly>
+    <members>
+        <member name="T:HttpCodeLib.HttpHelpers">
+            <summary>
+            Http请求操作类 
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.HttpHelpers.request">
+            <summary>
+             HttpWebRequest对象用来发起请求
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.HttpHelpers.response">
+            <summary>
+              获取响应流的数据对象
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.HttpHelpers.result">
+            <summary>
+            结果参数
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.HttpHelpers._stream">
+            <summary>
+            应答结果承载的内存流
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.HttpHelpers.RawResponse">
+            <summary>
+            承载读取数据流
+            </summary>
+        </member>
+        <member name="M:HttpCodeLib.HttpHelpers.GetHtml(HttpCodeLib.HttpItems,System.String@)">
+            <summary>
+            采用httpwebrequest方式访问网络,根据传入的URl地址，得到响应的数据字符串。
+            </summary>
+            <param name="objHttpItems">参数列表</param>
+            <param name="cookie">自动维护的字符串cookie</param>
+            <returns>HttpResults 为返回结果</returns>
+        </member>
+        <member name="M:HttpCodeLib.HttpHelpers.GetHtml(HttpCodeLib.HttpItems)">
+            <summary>
+            采用httpwebrequest方式访问网络,根据传入的URl地址，得到响应的数据字符串。
+            </summary>
+            <param name="objHttpItems">参数列表</param>
+            <returns>HttpResults 为返回结果</returns>
+        </member>
+        <member name="M:HttpCodeLib.HttpHelpers.GetHttpRequestData(HttpCodeLib.HttpItems)">
+            <summary>
+            根据传入的数据，得到相应页面数据
+            </summary>
+            <param name="objHttpItems">请求设置参数</param>
+            <returns>请求结果</returns>
+        </member>
+        <member name="M:HttpCodeLib.HttpHelpers.GetResponesInfo(HttpCodeLib.HttpItems@)">
+            <summary>
+            处理响应结果
+            </summary>
+            <param name="objHttpItems">请求设置参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.HttpHelpers.GetEncodingNew(HttpCodeLib.HttpItems@)">
+            <summary>
+            识别编码
+            </summary>
+            <param name="objHttpItems"></param>
+        </member>
+        <member name="M:HttpCodeLib.HttpHelpers.AsyncGetHtml(HttpCodeLib.HttpItems,System.Action{HttpCodeLib.HttpResults})">
+             <summary> 
+            采用异步方式访问网络,根据传入的URl地址，得到响应的数据字符串。 
+             </summary>
+             <param name="objHttpItems">参数列表</param>
+             <param name="callBack">完成后的回调函数</param>
+        </member>
+        <member name="M:HttpCodeLib.HttpHelpers.AsyncResponseData(System.IAsyncResult)">
+            <summary>
+            异步获取响应数据
+            </summary>
+            <param name="result"></param>
+        </member>
+        <member name="M:HttpCodeLib.HttpHelpers.AsyncGetHttpRequestData(HttpCodeLib.HttpItems,System.Action{HttpCodeLib.HttpResults})">
+            <summary>
+             根据传入的参数,来异步发起请求
+            </summary>
+            <param name="objItems">请求设置参数</param>
+            <param name="callBack">回调函数</param>
+        </member>
+        <member name="M:HttpCodeLib.HttpHelpers.TimeoutCallback(System.Object,System.Boolean)">
+            <summary>
+            超时回调
+            </summary>
+            <param name="state">HttpRequest对象</param>
+            <param name="timedOut">超时判断</param>
+        </member>
+        <member name="M:HttpCodeLib.HttpHelpers.GetMemoryStream(System.IO.Stream)">
+            <summary>
+            获取流中的数据转换为内存流处理
+            </summary>
+            <param name="streamResponse">流</param>
+        </member>
+        <member name="M:HttpCodeLib.HttpHelpers.SetAllowUnsafeHeaderParsing20(System.Boolean)">
+            <summary>
+            反射修改useUnsafeHeaderParsing
+            </summary>
+            <param name="useUnsafe">设置的参数值</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.HttpHelpers.SetRequest(HttpCodeLib.HttpItems)">
+             <summary>
+             为请求准备参数
+             </summary>
+            <param name="objHttpItems">参数列表</param> 
+        </member>
+        <member name="M:HttpCodeLib.HttpHelpers.SetCer(HttpCodeLib.HttpItems)">
+            <summary>
+            设置证书
+            </summary>
+            <param name="objHttpItems">请求设置参数</param>
+        </member>
+        <member name="M:HttpCodeLib.HttpHelpers.SetEncoding(HttpCodeLib.HttpItems)">
+            <summary>
+            设置编码
+            </summary>
+            <param name="objHttpItems">Http参数</param>
+        </member>
+        <member name="M:HttpCodeLib.HttpHelpers.SetCookie(HttpCodeLib.HttpItems)">
+            <summary>
+            设置Cookie
+            </summary>
+            <param name="objHttpItems">Http参数</param>
+        </member>
+        <member name="M:HttpCodeLib.HttpHelpers.SetPostData(HttpCodeLib.HttpItems)">
+            <summary>
+            设置Post数据
+            </summary>
+            <param name="objHttpItems">Http参数</param>
+        </member>
+        <member name="M:HttpCodeLib.HttpHelpers.SetProxy(HttpCodeLib.HttpItems)">
+            <summary>
+            设置代理
+            </summary>
+            <param name="objHttpItems">参数对象</param>
+        </member>
+        <member name="M:HttpCodeLib.HttpHelpers.CheckValidationResult(System.Object,System.Security.Cryptography.X509Certificates.X509Certificate,System.Security.Cryptography.X509Certificates.X509Chain,System.Net.Security.SslPolicyErrors)">
+            <summary>
+            回调验证证书问题
+            </summary>
+            <param name="sender">流对象</param>
+            <param name="certificate">证书</param>
+            <param name="chain">X509Chain</param>
+            <param name="errors">SslPolicyErrors</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:HttpCodeLib.HttpHelpers.GetUrl(System.String)">
+            <summary>    
+            传入一个正确或不正确的URl，返回正确的URL
+            </summary>    
+            <param name="URL">url</param>   
+            <returns>
+            </returns>
+        </member>
+        <member name="M:HttpCodeLib.HttpHelpers.GetImg(HttpCodeLib.HttpResults)">
+            <summary>
+            读取返回对象中数据,并返回Image格式图片
+            </summary>
+            <param name="hr">GetHtml后的请求结果</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.HttpHelpers.byteArrayToImage(System.Byte[])">
+            <summary>
+            字节数组生成图片
+            </summary>
+            <param name="Bytes">字节数组</param>
+            <returns>图片</returns>
+        </member>
+        <member name="T:HttpCodeLib.HttpItems">
+            <summary>
+            Http请求参考类 
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.URL">
+            <summary>
+            请求URL必须填写
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.Method">
+            <summary>
+            请求方式默认为GET方式
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.Timeout">
+            <summary>
+            默认请求超时时间
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.ReadWriteTimeout">
+            <summary>
+            默认写入Post数据超时间
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.Accept">
+            <summary>
+            请求标头值 默认为image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/x-shockwave-flash, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, */*
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.ContentType">
+            <summary>
+            请求返回类型默认 application/x-www-form-urlencoded
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.UserAgent">
+            <summary>
+            客户端访问信息默认Mozilla/5.0 (Windows NT 6.1; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.PostEncoding">
+            <summary>
+            Post数据时的编码 默认为 Default,如需必要 请勿修改
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.HttpItems.Encoding">
+            <summary>
+             默认的编码类型,如果不初始化,则为null,每次自动识别 
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.EncodingStr">
+            <summary>
+            返回数据编码默认为NUll,可以自动识别
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.PostDataType">
+            <summary>
+            Post的数据类型
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.Postdata">
+            <summary>
+            Post请求时要发送的字符串Post数据
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.PostdataByte">
+            <summary>
+            Post请求时要发送的Byte类型的Post数据
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.CookieCollection">
+            <summary>
+            Cookie对象集合
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.Container">
+            <summary>
+            自动处理cookie
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.Cookie">
+            <summary>
+            请求时的Cookie
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.Referer">
+            <summary>
+            来源地址，上次访问地址
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.CerPath">
+            <summary>
+            证书绝对路径
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.IsToLower">
+            <summary>
+            是否设置为全文小写
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.IsAjax">
+            <summary>
+            是否增加异步请求头
+            对应协议 : x-requested-with: XMLHttpRequest
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.Allowautoredirect">
+            <summary>
+            支持跳转页面，查询结果将是跳转后的页面
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.HttpItems.expect100Continue">
+            <summary>
+            当该属性设置为 true 时，使用 POST 方法的客户端请求应该从服务器收到 100-Continue 响应，以指示客户端应该发送要发送的数据。此机制使客户端能够在服务器根据请求报头打算拒绝请求时，避免在网络上发送大量的数据
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.Expect100Continue">
+            <summary>
+            当该属性设置为 true 时，使用 POST 方法的客户端请求应该从服务器收到 100-Continue 响应，以指示客户端应该发送要发送的数据。此机制使客户端能够在服务器根据请求报头打算拒绝请求时，避免在网络上发送大量的数据 默认False
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.Connectionlimit">
+            <summary>
+            最大连接数
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.ProxyUserName">
+            <summary>
+            代理Proxy 服务器用户名
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.ProxyPwd">
+            <summary>
+            代理 服务器密码
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.ProxyIp">
+            <summary>
+            代理 服务IP
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.ResultType">
+            <summary>
+            设置返回类型String和Byte
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.Header">
+            <summary>
+            头数据
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.UseUnsafe">
+            <summary>
+            如果提示以下错误,请设置为true
+            服务器提交了协议冲突. Section=ResponseHeader Detail=CR 后面必须是 LF
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpItems.IsEOFError">
+            <summary>
+            如果提示以下错误,请设置为true
+            从传输流收到意外的 EOF 或 0 个字节 
+            </summary>
+        </member>
+        <member name="T:HttpCodeLib.HttpResults">
+            <summary>
+            Http返回参数类
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpResults.ResponseUrl">
+            <summary>
+            响应结果的URL(可获取自动跳转后地址)   
+            如果获取跳转后地址失败,请使用RedirectUrl属性,
+            并设置HttpItems对象的Allowautoredirect =false;
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpResults.RedirectUrl">
+            <summary>
+            获取重定向的URL 
+            使用本属性时,请先关闭自动跳转属性  
+            设置方法如下:
+            设置HttpItems对象的Allowautoredirect =false;
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpResults.Container">
+            <summary>
+            自动处理Cookie集合对象
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpResults.Cookie">
+            <summary>
+            Http请求返回的Cookie
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpResults.CookieCollection">
+            <summary>
+            Cookie对象集合
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpResults.Html">
+            <summary>
+            返回的String类型数据 只有ResultType.String时才返回数据，其它情况为空
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpResults.ResultByte">
+            <summary>
+            返回的Byte数组 只有ResultType.Byte时才返回数据，其它情况为空
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpResults.Header">
+            <summary>
+            头数据
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.HttpResults.StatusCode">
+            <summary>
+            Http请求后的状态码
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpResults.StatusCodeNum">
+            <summary>
+            状态码的数字形式
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.HttpResults.StatusDescription">
+            <summary>
+            详细状态描述
+            </summary>
+        </member>
+        <member name="T:HttpCodeLib.AsyncHttpItem">
+            <summary>
+            异步实体类
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.AsyncHttpItem.result">
+            <summary>
+            请求结果类
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.AsyncHttpItem.request">
+            <summary>
+             HttpWebRequest对象用来发起请求
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.AsyncHttpItem.callBack">
+            <summary>
+            异步回调函数
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.AsyncHttpItem.objHttpCodeItem">
+            <summary>
+            基础请求设置类
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.AsyncHttpItem.atomLock">
+            <summary>
+            原子锁
+            </summary>
+        </member>
+        <member name="T:HttpCodeLib.ResultType">
+            <summary>
+            返回类型
+            </summary>
+        </member>
+        <member name="T:HttpCodeLib.PostDataType">
+            <summary>
+            Post的数据格式默认为string
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.PostDataType.String">
+            <summary>
+            字符串
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.PostDataType.Byte">
+            <summary>
+            字节流
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.PostDataType.FilePath">
+            <summary>
+            文件路径
+            </summary>
+        </member>
+        <member name="T:HttpCodeLib.Wininet">
+            <summary>
+            WinInet的方式请求数据
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.Wininet.WininetTimeOut">
+            <summary>
+            Wininet超时时间 默认0 不设置超时,由于是自行实现(微软没修复超时的bug) 所以如果设置后,每次请求都会暂停.
+            </summary>
+        </member>
+        <member name="M:HttpCodeLib.Wininet.GetLocalTime">
+            <summary>
+            使用API获取本地时间
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.Wininet.SetLocalTime(System.DateTime)">
+            <summary>
+            使用API设置本地时间
+            </summary>
+            <param name="dt"></param>
+        </member>
+        <member name="M:HttpCodeLib.Wininet.GetData(System.String)">
+            <summary>
+            WinInet 方式GET
+            </summary>
+            <param name="Url">地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.Wininet.GetDataPro(System.IO.MemoryStream)">
+            <summary>
+            将内存流转换为字符串
+            </summary>
+            <param name="mstream">需要转换的流</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.Wininet.PostData(System.String,System.String,System.Text.StringBuilder)">
+            <summary>
+            POST
+            </summary>
+            <param name="Url">地址</param>
+            <param name="postData">提交数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.Wininet.GetUtf8(System.String)">
+            <summary>
+            GET（UTF-8）模式
+            </summary>
+            <param name="Url">地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.Wininet.PostUtf8(System.String,System.String,System.Text.StringBuilder)">
+            <summary>
+            POST（UTF-8）
+            </summary>
+            <param name="Url">地址</param>
+            <param name="postData">提交数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.Wininet.GetImage(System.String)">
+            <summary>
+            获取网页图片(Image)
+            </summary>
+            <param name="Url">图片地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.Wininet.GetImage(System.IO.MemoryStream)">
+            <summary>
+            获取网页图片(Image)
+            </summary>
+            <param name="mstream">Stream流</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.Wininet.GetHtmlPro(System.String,System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            重载提交数据(允许使用代理)
+            </summary>
+            <param name="Url">请求地址</param>
+            <param name="Postdata">提交的数据(Get时为空)</param>
+            <param name="proxy">代理地址(IP:端口 例如 127.0.0.1:8888)</param>
+            <param name="subcookie">设置cookie,例如  JS增加的cookie.如非需要可不填写</param>
+            <param name="subheader">设置数据头,如非需要可不填写</param>
+            <param name="isMoved">是否允许跳转(允许3xx 跳转)</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.Wininet.GetHtml(System.String,System.String,System.Text.StringBuilder)">
+            <summary>
+            请求数据
+            </summary>
+            <param name="Url">请求地址</param>
+            <param name="Postdata">提交的数据</param>
+            <param name="Header">请求头</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.Wininet.GetCookies(System.String)">
+            <summary>
+            取出cookies
+            </summary>
+            <param name="url">完整的链接格式</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.Wininet.GetAllCookies(System.Net.CookieContainer)">
+            <summary>
+            遍历CookieContainer
+            </summary>
+            <param name="cc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.Wininet.StringToCookie(System.String,System.String)">
+            <summary>
+            将String转CookieContainer
+            </summary>
+            <param name="url"></param>
+            <param name="cookie"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.Wininet.CookieToString(System.Net.CookieContainer)">
+            <summary>
+            将CookieContainer转换为string类型
+            </summary>
+            <param name="cc"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HttpCodeLib.SystemTime">
+            <summary>
+            系统时间结构体
+            </summary>
+        </member>
+        <member name="T:HttpCodeLib.XJHTTP">
+            <summary>
+            玄机网一键HTTP类库
+            懒人库/快捷库
+            </summary>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetTime(System.String)">
+            <summary>
+            时间戳转为C#格式时间
+            </summary>
+            <param name="timeStamp">Unix时间戳格式</param>
+            <returns>C#格式时间</returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetTimeByJs">
+            <summary>
+            获取JS时间戳 13位
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetTimeByCSharp13(System.Int32)">
+            <summary>
+            返回13位时间戳 非JS方式
+            </summary>
+            <param name="nAddSecond"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetTimeByCSharp">
+            <summary>  
+            获取时间戳 C# 10位 
+            </summary>  
+            <returns></returns>  
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetTimeToStamp(System.DateTime)">
+            <summary>
+            指定时间转换时间戳
+            </summary>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetLocalTime">
+            <summary>
+            使用API获取本地时间
+            </summary>
+            <returns>返回本地电脑的Datatime数据</returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.SetLocalTime(System.DateTime)">
+            <summary>
+            使用API设置本地时间
+            </summary>
+            <param name="dt">需要设置的时间</param>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetServerTime(HttpCodeLib.HttpResults)">
+            <summary>
+            获取服务器返回的时间,如果Header中没有Date则返回当前时间
+            </summary>
+            <param name="hrs">请求结果对象</param>
+            <returns>返回本地时区Datatime数据</returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetTimeToGMTString(System.DateTime)">
+            <summary>
+            本地时间转成GMT时间 (参数如果不传入则为当前时间)
+            本地时间为：2011-9-29 15:04:39
+            转换后的时间为：Thu, 29 Sep 2011 07:04:39 GMT
+            </summary>
+            <param name="dt">参数如果不传入则为当前时间 DateTime.Now</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetTimeToGMTFormat(System.DateTime)">
+             <summary>
+            本地时间转成GMT格式的时间(参数如果不传入则为当前时间)
+            本地时间为：2011-9-29 15:04:39
+            转换后的时间为：Thu, 29 Sep 2011 15:04:39 GMT+0800
+             </summary>
+             <param name="dt">参数如果不传入则为当前时间 DateTime.Now</param>
+             <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetTime4Gmt(System.String)">
+            <summary>  
+            GMT时间转成本地时间  
+            DateTime dt1 = GMT2Local("Thu, 29 Sep 2011 07:04:39 GMT");
+            转换后的dt1为：2011-9-29 15:04:39
+            DateTime dt2 = GMT2Local("Thu, 29 Sep 2011 15:04:39 GMT+0800");
+            转换后的dt2为：2011-9-29 15:04:39
+            </summary>  
+            <param name="gmt">字符串形式的GMT时间</param>  
+            <returns></returns>  
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetStringMid(System.String,System.String,System.String)">
+            <summary>
+            取文本中间
+            </summary>
+            <param name="allStr">原字符</param>
+            <param name="firstStr">前面的文本</param>
+            <param name="lastStr">后面的文本</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetStringMids(System.String,System.String,System.String,System.String)">
+            <summary>
+            批量取文本中间
+            </summary>
+            <param name="allStr">原字符</param>
+            <param name="firstStr">前面的文本</param>
+            <param name="lastStr">后面的文本</param>
+            <param name="regexCode">默认为万能表达式(.*?)</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.EnUrlMethod(System.String)">
+            <summary>
+            URL加密适用于淘宝中文编码算法
+            </summary>
+            <param name="str">明文</param>
+            <returns>密文</returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.UrlEncoding(System.String,System.Text.Encoding)">
+            <summary>
+            Url编码,encoding默认为utf8编码
+            </summary>
+            <param name="str">需要编码的字符串</param>
+            <param name="encoding">指定编码类型</param>
+            <returns>编码后的字符串</returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.DeUrlMethod(System.String)">
+            <summary>
+            URL解密适用于淘宝中文编码算法
+            </summary>
+            <param name="str">密文</param>
+            <returns>明文</returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.UrlDecoding(System.String,System.Text.Encoding)">
+            <summary>
+            Url解码,encoding默认为utf8编码
+            </summary>
+            <param name="str">需要解码的字符串</param>
+            <param name="encoding">指定解码类型</param>
+            <returns>解码后的字符串</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:HttpCodeLib.XJHTTP.HtmlDecode(System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:HttpCodeLib.XJHTTP.HtmlEncode(System.String)" -->
+        <member name="M:HttpCodeLib.XJHTTP.Right(System.String,System.String,System.Int32)">
+            <summary>
+            取文本右边 
+            默认取出右边所有文本,如果需要取固定长度请设置 length参数
+            异常则返回空字符串
+            </summary>
+            <param name="str">原始字符串</param>
+            <param name="right">需要确认位置的字符串</param>
+            <param name="length">默认0,如果设置按照设置的值取出数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.Left(System.String,System.String,System.Int32)">
+            <summary>
+             取文本左边
+             默认取出左边所有文本,如果需要取固定长度请设置 length参数
+            异常则返回空字符串
+            </summary>
+            <param name="str">原始字符串</param>
+            <param name="left">需要确认位置的字符串</param>
+            <param name="length">默认0,如果设置按照设置的值取出数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetMidHtml(System.String,System.String,System.String)">
+            <summary>
+            取文本中间的其他写法
+            </summary>
+            <param name="html">原始Html</param>
+            <param name="s">开始字符串</param>
+            <param name="e">结束字符串</param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:HttpCodeLib.XJHTTP.FromUnicodeString(System.String,System.String,System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:HttpCodeLib.XJHTTP.GetUnicodeString(System.String,System.String)" -->
+        <member name="M:HttpCodeLib.XJHTTP.GetString2Base64(System.String,System.Text.Encoding)">
+            <summary>
+            将字符串转换为base64格式 默认UTF8编码
+            </summary>
+            <param name="str">原始字符串</param>
+            <param name="encoding">编码</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetStringbyBase64(System.String,System.Text.Encoding)">
+            <summary>
+            base64字符串转换为普通格式 默认UTF8编码
+            </summary>
+            <param name="str">原始字符串</param>
+            <param name="encoding">编码</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetAscii2string(System.Byte[])">
+            <summary>
+            将byte数组转换为AscII字符
+            </summary>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.Bytes2HexString(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            将字节数组转化为十六进制字符串，每字节表示为两位
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.HexToStr(System.String)">
+            <summary>
+            字符串转16进制
+            </summary>
+            <param name="mHex"></param>
+            <returns>返回十六进制代表的字符串</returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.HexString2Bytes(System.String)">
+            <summary>
+            将十六进制字符串转化为字节数组
+            </summary>
+            <param name="src"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.UpdateCookie(System.String,System.String)">
+            <summary>
+            合并Cookie，将cookie2与cookie1合并更新 返回字符串类型Cookie
+            </summary>
+            <param name="cookie1">旧cookie</param>
+            <param name="cookie2">新cookie</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.ClearCookie(System.String)">
+            <summary>
+            清理string类型Cookie.剔除无用项返回结果为null时遇见错误.
+            </summary>
+            <param name="Cookies"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetCookieByWininet(System.String)">
+            <summary>
+            从Wininet中获取Cookie对象
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetAllCookieByHttpItems(HttpCodeLib.HttpItems)">
+            <summary>
+            获取当前请求所有Cookie
+            </summary>
+            <param name="items"></param>
+            <returns>Cookie集合</returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetAllCookie(System.Net.CookieContainer)">
+            <summary>
+            获取CookieContainer 中的所有对象
+            </summary>
+            <param name="cc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.CookieTostring(System.Net.CookieContainer)">
+            <summary>
+            将 CookieContainer 对象转换为字符串类型
+            </summary>
+            <param name="cc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.StringToCookie(System.String,System.String)">
+            <summary>
+            将文字Cookie转换为CookieContainer 对象
+            </summary>
+            <param name="url"></param>
+            <param name="cookie"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.AddCookieToContainer(System.Net.CookieContainer,System.String,System.String)">
+            <summary>
+            【不推荐使用】 推荐使用字符串方式维护Cookie
+            将StringCookie 添加到 CookieContainer对象中
+            当CookieContainer出现问题时请调用本方法修复 CookieContainer对象
+            更新失败时,返回原来的CookieContainer对象
+            
+            </summary>
+            <param name="cookie_container">需要更新的cookie_container</param>
+            <param name="cookie">字符串cookie</param>
+            <param name="domain">domain默认为空</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.InternetSetCookie(System.String,System.String,System.String)">
+            
+             设置cookie
+            
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.InternetGetCookie(System.String,System.String,System.Text.StringBuilder,System.Int32@)">
+            
+             获取cookie
+            
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.SetIeCookie(System.String,System.String)">
+            <summary>
+            设置IE cookie
+            </summary>
+            <param name="GetUrl">URL</param>
+            <param name="NewCookie">Cookie</param>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.ClearIECookie">
+            <summary>
+            删除IE COOKIE
+            </summary>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.FileDelete(System.String)">
+            <summary>
+            删除一个文件，System.IO.File.Delete()函数不可以删除只读文件，这个函数可以强行把只读文件删除。
+            </summary>
+            <param name="path">文件路径</param>
+            <returns>成功为true</returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.FolderClear(System.String)">
+            <summary>
+            删除文件夹
+            </summary>
+            <param name="path">文件夹路径</param>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.CleanHistory">
+            <summary>
+            删除历史记录  Win7+ 需要管理员权限
+            </summary>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.CleanTempFiles">
+            <summary>
+             删除临时文件  Win7+ 需要管理员权限
+            </summary>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.CleanCookie">
+            <summary>
+            删除Cookie文件 Win7+ 需要管理员权限
+            </summary>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.CleanAll">
+            
+             删除全部 历史记录,Cookie,临时文件
+            
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.RunCmd(System.String)">
+            <summary>
+            调用CMD执行命令
+            </summary>
+            <param name="cmd"></param>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.RunJsMethod(System.String,System.String,System.String,System.String)">
+            <summary>
+            执行js代码(JS代码,参数,调用方法名,方法名[默认Eval 可选Run])
+            </summary>
+            <param name="reString">JS代码</param>
+            <param name="para">参数</param>
+            <param name="MethodName">调用方法名</param>
+            <param name="Method">方法名:默认Eval 可选Run</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.OpenUrl(System.String,System.Int32)">
+            <summary>
+            打开指定URL openType:0使用IE打开,!=0 使用默认浏览器打开
+            </summary>
+            <param name="url">需要打开的地址</param>
+            <param name="openType">0使用IE,其他使用默认</param>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.EncryptMD5String(System.String)">
+            <summary>
+            字符串MD5加密
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetAList(System.String)">
+            <summary>
+            获取所有的A标签
+            </summary>
+            <param name="html">要分析的Html代码</param>
+            <returns>返回一个List存储所有的A标签</returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetImgList(System.String)">
+            <summary>
+            获取所有的Img标签
+            </summary>
+            <param name="html">要分析的Html代码</param>
+            <returns>返回一个List存储所有的Img标签</returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.StripHTML(System.String)">
+            <summary>
+            过滤html标签
+            </summary>
+            <param name="html">html的内容</param>
+            <returns>处理后的文本</returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.ReplaceNewLine(System.String)">
+            <summary>
+            过滤html中所有的换行符号
+            </summary>
+            <param name="html">html的内容</param>
+            <returns>处理后的文本</returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetHtmlTitle(System.String)">
+            <summary>
+            提取网页Title
+            </summary>
+            <param name="html">Html</param>
+            <returns>返回Title</returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.DonwnLoad(System.String,System.String,System.Net.CookieContainer,System.String)">
+            <summary>
+            文件下载[如果连接不是绝对路径存在跳转默认会自动跳转]
+            会自动分析协议头中的filename
+            如果分析失败则直接存储为默认名[默认为:.zip格式].
+            成功返回true;
+            </summary>
+            <param name="url">下载地址</param>
+            <param name="paths">保存绝对路径 如:c://download//</param>
+            <param name="cc">Cookie</param>
+            <param name="defaultName">默认后缀</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.WebClientDonwnLoad(System.String,System.String,System.String,System.Net.CookieContainer@,System.Text.Encoding,System.String)">
+            <summary>
+            文件下载[如果连接不是绝对路径存在跳转默认会自动跳转]
+            会自动分析协议头中的filename
+            如果分析失败则直接存储为默认名[默认为:.zip格式].
+            成功返回true;
+            </summary>
+            <param name="url">下载地址</param>
+            <param name="paths">保存绝对路径 如:c://download//</param>
+            <param name="cc">Ref Cookie 返回处理后的Cookie可再次使用</param> 
+            <param name="Encoder">编码默认utf8</param>
+            <param name="defaultName">默认后缀[zip]</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.UploadPost(System.String,System.String,System.String,System.Net.CookieContainer@,System.Text.Encoding)">
+            <summary>
+            WebClient Post 上传
+            用于上传类型为multipart/form-data 
+            如果上传失败,请检查协议头是否有自定义协议头.如Ajax头
+            </summary>
+            <param name="Url">上传地址</param>
+            <param name="Referer">referer</param>
+            <param name="PostData"></param>
+            <param name="cc">Cookie</param>
+            <param name="Encoder">编码默认utf8</param> 
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetHtml(System.String)">
+            <summary>
+            普通请求.直接返回标准结果
+            </summary>
+            <param name="url">请求的URL</param>
+            <returns>返回结果</returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetHtml(System.String,System.String)">
+            <summary>
+            普通请求.直接返回标准结果
+            </summary>
+            <param name="url">请求的URL</param>
+            <param name="ipProxy">代理IP地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetHtml(System.String,System.Net.CookieContainer)">
+            <summary>
+            普通请求.直接返回标准结果
+            </summary>
+            <param name="url">请求的URL</param>
+            <param name="cc">当前Cookie</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetHtml(System.String,System.Net.CookieContainer,System.String)">
+             <summary>
+             普通请求.直接返回标准结果
+             </summary>
+             <param name="url">请求的URL</param>
+             <param name="cc">当前Cookie</param>
+            <param name="ipProxy">代理IP地址</param>
+             <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetImage(System.String,System.String,System.Net.CookieContainer)">
+            <summary>
+             普通请求.直接返回标准结果
+            </summary>
+            <param name="picurl">图片请求地址</param>
+            <param name="referer">上一次请求地址</param>
+            <param name="cc">当前Cookie</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetImageByImage(System.String,System.String,System.Net.CookieContainer)">
+            <summary>
+            普通请求.直接返回Image格式图像
+            </summary>
+            <param name="picurl">图片请求地址</param>
+            <param name="referer">上一次请求地址</param>
+            <param name="cc">当前Cookie</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.PostHtml(System.String,System.String,System.String,System.Boolean,System.Net.CookieContainer)">
+            <summary>
+            普通请求.直接返回标准结果
+            </summary>
+            <param name="posturl">post地址</param>
+            <param name="referer">上一次请求地址</param>
+            <param name="postdata">请求数据</param>
+            <param name="IsAjax">是否需要异步标识</param>
+            <param name="cc">当前Cookie</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.AsyncPostHtml(HttpCodeLib.HttpItems,System.Action{HttpCodeLib.HttpResults})">
+            <summary>
+            异步POST请求 通过回调返回结果
+            </summary>
+            <param name="objHttpItems">请求项</param>
+            <param name="callBack">回调地址</param>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.AsyncGetHtml(HttpCodeLib.HttpItems,System.Action{HttpCodeLib.HttpResults})">
+            <summary>
+            异步GET请求 通过回调返回结果
+            </summary>
+            <param name="objHttpItems">请求项</param>
+            <param name="callBack">回调地址</param>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetHtmlByWininet(System.String)">
+            <summary>
+            WinInet方式GET请求  直接返回网页内容
+            </summary>
+            <param name="url">请求地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetHtmlByWininetUTF8(System.String)">
+            <summary>
+            WinInet方式GET请求(UTF8)  直接返回网页内容
+            </summary>
+            <param name="url">请求地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.POSTHtmlByWininet(System.String,System.String)">
+            <summary>
+            WinInet方式POST请求  直接返回网页内容
+            </summary>
+            <param name="url">提交地址</param>
+            <param name="postdata">提交内容</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.POSTHtmlByWininetUTF8(System.String,System.String)">
+            <summary>
+            WinInet方式POST请求  直接返回网页内容
+            </summary>
+            <param name="url">提交地址</param>
+            <param name="postdata">提交内容</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpCodeLib.XJHTTP.GetImageByWininet(System.String)">
+            <summary>
+            WinInet方式请求 图片  直接返回Image
+            </summary>
+            <param name="url">提交地址</param>
+            <returns></returns>
+        </member>
+        <member name="T:HttpCodeLib.RegexString">
+            <summary>
+            正则表达式静态类
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.RegexString.Alist">
+            <summary>
+            获取所有的A链接
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.RegexString.ImgList">
+            <summary>
+            获取所有的Img标签
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.RegexString.Nscript">
+            <summary>
+            所有的Nscript
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.RegexString.Style">
+            <summary>
+            所有的Style
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.RegexString.Script">
+            <summary>
+            所有的Script
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.RegexString.Html">
+            <summary>
+            所有的Html
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.RegexString.NewLine">
+            <summary>
+            换行符号
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.RegexString.Enconding">
+             <summary>
+            获取网页编码
+             </summary>
+        </member>
+        <member name="F:HttpCodeLib.RegexString.AllHtml">
+            <summary>
+            所有Html
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.RegexString.HtmlTitle">
+            <summary>
+            title
+            </summary>
+        </member>
+        <member name="T:HttpCodeLib.ImgItem">
+            <summary>
+            图片对象 
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.ImgItem.Src">
+            <summary>
+            图片网址
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.ImgItem.Html">
+            <summary>
+            图片标签Html
+            </summary>
+        </member>
+        <member name="T:HttpCodeLib.AItem">
+            <summary>
+            A连接对象   
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.AItem.Href">
+            <summary>
+            链接地址
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.AItem.Text">
+            <summary>
+            链接文本
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.AItem.Img">
+            <summary>
+            链接的图片 
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.AItem.Html">
+            <summary>
+            整个连接Html
+            </summary>
+        </member>
+        <member name="P:HttpCodeLib.AItem.Type">
+            <summary>
+            A链接的类型 文本/图像
+            </summary>
+        </member>
+        <member name="T:HttpCodeLib.AType">
+            <summary>
+            A 标签类型
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.AType.Text">
+            <summary>
+            文本链接(默认)
+            </summary>
+        </member>
+        <member name="F:HttpCodeLib.AType.Img">
+            <summary>
+            图片链接
+            </summary>
+        </member>
+        <member name="T:HttpCodeLib.StreamEncoder">
+            <summary>
+            从流识别编码
+            </summary>
+        </member>
+        <member name="M:HttpCodeLib.StreamEncoder.GetEncoding(System.String)">
+            <summary>   
+            取得一个文本文件的编码方式。如果无法在文件头部找到有效的前导符，Encoding.Default将被返回。   
+            </summary>   
+            <param name="fileName">文件名。</param>   
+            <returns></returns>   
+        </member>
+        <member name="M:HttpCodeLib.StreamEncoder.GetEncoding(System.IO.FileStream)">
+            <summary>   
+            取得一个文本文件流的编码方式。   
+            </summary>   
+            <param name="stream">文本文件流。</param>   
+            <returns></returns>   
+        </member>
+        <member name="M:HttpCodeLib.StreamEncoder.GetEncoding(System.String,System.Text.Encoding)">
+            <summary>   
+            取得一个文本文件的编码方式。   
+            </summary>   
+            <param name="fileName">文件名。</param>   
+            <param name="defaultEncoding">默认编码方式。当该方法无法从文件的头部取得有效的前导符时，将返回该编码方式。</param>   
+            <returns></returns>   
+        </member>
+        <member name="M:HttpCodeLib.StreamEncoder.GetEncoding(System.IO.FileStream,System.Text.Encoding)">
+            <summary>   
+            取得一个文本文件流的编码方式。   
+            </summary>   
+            <param name="stream">文本文件流。</param>   
+            <param name="defaultEncoding">默认编码方式。当该方法无法从文件的头部取得有效的前导符时，将返回该编码方式。</param>   
+            <returns></returns>   
+        </member>
+        <member name="M:HttpCodeLib.StreamEncoder.GetEncoding(System.IO.Stream)">
+            <summary>   
+            通过给定的文件流，判断文件的编码类型   
+            </summary>   
+            <param name="fs">文件流</param>   
+            <returns>文件的编码类型</returns>   
+        </member>
+        <member name="M:HttpCodeLib.StreamEncoder.IsUTF8Bytes(System.Byte[])">
+            <summary>   
+            判断是否是不带 BOM 的 UTF8 格式   
+            </summary>   
+            <param name="data"></param>   
+            <returns></returns>   
+        </member>
+    </members>
+</doc>
