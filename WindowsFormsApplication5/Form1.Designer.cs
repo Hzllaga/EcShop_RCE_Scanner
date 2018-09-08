@@ -152,7 +152,7 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "EcShop ≤ 2.7.3 Remote Code Execution   ";
+            this.Text = "EcShop < 4.0 Remote Code Execution   ";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
